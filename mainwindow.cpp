@@ -37,6 +37,9 @@ void MainWindow::displayStudents()
     if (nameFilter != "")
         model->setFilter(QString("firstname LIKE '%%1%' OR lastname LIKE '%%1%'").arg(nameFilter));
 
+    if (displayOnlyWithoutCert)
+        model->setFilter("certdate IS NULL");
+
     model->setSort(1, Qt::AscendingOrder);
     model->select();
 
@@ -75,5 +78,12 @@ void MainWindow::on_btnSearchName_clicked()
     displayStudents();
 
     /* DEBUG */ qInfo() <<  "Search:" << nameFilter;
+}
+
+
+void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
+{
+    displayOnlyWithoutCert = checked;
+    displayStudents();
 }
 

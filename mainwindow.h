@@ -23,10 +23,13 @@ public:
 private slots:
     void on_btnSearchName_clicked();
 
+    void on_rbOnlyWithoutCert_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
     QSqlTableModel *model;
     QString nameFilter = "";
+    bool displayOnlyWithoutCert = false;
 };
 #endif // MAINWINDOW_H
