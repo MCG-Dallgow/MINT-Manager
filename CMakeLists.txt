@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -45,6 +46,7 @@ else()
 endif()
 
 target_link_libraries(mint-manager PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(mint-manager PRIVATE Qt${QT_VERSION_MAJOR}::Sql)
 
 set_target_properties(mint-manager PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
