@@ -6,6 +6,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QStandardPaths>
+#include <QSqlRecord>
 
 void MainWindow::setupDatabase()
 {
@@ -85,5 +86,26 @@ void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
 {
     displayOnlyWithoutCert = checked;
     displayStudents();
+}
+
+
+void MainWindow::on_btnRemoveStudent_clicked()
+{
+    int studentId = model->record(selectedTableIndex.row()).value(0).value<int>();
+
+    /* DEBUG */ qInfo() << " Deleted Student ID:" << studentId;
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM students WHERE id=:id");
+    query.bindValue(":id", studentId);
+    query.exec();
+
+    displayStudents();
+}
+
+
+void MainWindow::on_tblStudents_pressed(const QModelIndex &index)
+{
+    selectedTableIndex = index;
 }
 

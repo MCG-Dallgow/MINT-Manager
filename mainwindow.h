@@ -25,11 +25,16 @@ private slots:
 
     void on_rbOnlyWithoutCert_toggled(bool checked);
 
+    void on_btnRemoveStudent_clicked();
+
+    void on_tblStudents_pressed(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
     QSqlTableModel *model;
     QString nameFilter = "";
     bool displayOnlyWithoutCert = false;
+    QModelIndex selectedTableIndex;
 };
 #endif // MAINWINDOW_H
