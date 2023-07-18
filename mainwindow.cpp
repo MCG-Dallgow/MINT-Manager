@@ -34,6 +34,9 @@ void MainWindow::displayStudents()
 {
     model->setTable("students");
 
+    if (nameFilter != "")
+        model->setFilter(QString("firstname LIKE '%%1%' OR lastname LIKE '%%1%'").arg(nameFilter));
+
     model->setSort(1, Qt::AscendingOrder);
     model->select();
 
@@ -63,5 +66,14 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+void MainWindow::on_btnSearchName_clicked()
+{
+    nameFilter = ui->leSearchName->text().trimmed();
+    displayStudents();
+
+    /* DEBUG */ qInfo() <<  "Search:" << nameFilter;
 }
 

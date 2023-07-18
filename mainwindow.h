@@ -20,9 +20,13 @@ public:
     void setupDatabase();
     void displayStudents();
 
+private slots:
+    void on_btnSearchName_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
     QSqlTableModel *model;
+    QString nameFilter = "";
 };
 #endif // MAINWINDOW_H
