@@ -30,6 +30,24 @@ void MainWindow::setupDatabase()
     /* DEBUG */ qInfo() << (ok ? "Successful" : "Failed") << setupQuery.lastError();
 }
 
+void MainWindow::displayStudents()
+{
+    model->setTable("students");
+
+    model->setSort(1, Qt::AscendingOrder);
+    model->select();
+
+    model->setHeaderData(1, Qt::Horizontal, "Nachname");
+    model->setHeaderData(2, Qt::Horizontal, "Vorname");
+    model->setHeaderData(3, Qt::Horizontal, "Geburtsdatum");
+    model->setHeaderData(4, Qt::Horizontal, "Zertifikat");
+
+    ui->tblStudents->setModel(model);
+    ui->tblStudents->hideColumn(0);
+    ui->tblStudents->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tblStudents->show();
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -37,6 +55,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     setupDatabase();
+
+    model = new QSqlTableModel;
+    displayStudents();
 }
 
 MainWindow::~MainWindow()

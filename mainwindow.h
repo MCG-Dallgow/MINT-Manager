@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QSqlDatabase>
+#include <QSqlTableModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,9 +18,11 @@ public:
     ~MainWindow();
 
     void setupDatabase();
+    void displayStudents();
 
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
+    QSqlTableModel *model;
 };
 #endif // MAINWINDOW_H
