@@ -20,6 +20,9 @@
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
       <property name="currentIndex">
        <number>1</number>
       </property>
@@ -71,6 +74,13 @@
          </layout>
         </item>
         <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QTableView" name="tblStudents">
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
@@ -81,9 +91,28 @@
          </widget>
         </item>
         <item>
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QPushButton" name="btnAddStudent">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>32</height>
+             </size>
+            </property>
             <property name="text">
              <string>Schüler hinzufügen</string>
             </property>
@@ -91,6 +120,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="btnEditStudent">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>32</height>
+             </size>
+            </property>
             <property name="text">
              <string>Schüler bearbeiten</string>
             </property>
@@ -98,6 +133,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="btnRemoveStudent">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>32</height>
+             </size>
+            </property>
             <property name="text">
              <string>Schüler löschen</string>
             </property>
