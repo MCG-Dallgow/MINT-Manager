@@ -8,6 +8,8 @@
 #include <QStandardPaths>
 #include <QSqlRecord>
 
+#include "editstudentdialog.h"
+
 void MainWindow::setupDatabase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -107,5 +109,29 @@ void MainWindow::on_btnRemoveStudent_clicked()
 void MainWindow::on_tblStudents_pressed(const QModelIndex &index)
 {
     selectedTableIndex = index;
+}
+
+
+void MainWindow::on_btnAddStudent_clicked()
+{
+    dialog = new EditStudentDialog();
+    dialog->exec();
+
+    displayStudents();
+}
+
+
+void MainWindow::on_btnEditStudent_clicked()
+{
+    qInfo() << selectedTableIndex;
+    int studentId = selectedTableIndex.row() == -1
+                        ? -1
+                        : model->record(selectedTableIndex.row()).value(0).value<int>();
+    qInfo() << studentId;
+
+    dialog = new EditStudentDialog(studentId);
+    dialog->exec();
+
+    displayStudents();
 }
 
