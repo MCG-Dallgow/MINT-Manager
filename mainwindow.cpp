@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -14,8 +15,15 @@ void MainWindow::setupDatabase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
 
-    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/test.sqlite";
-    db.setDatabaseName(path);
+    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
+    QDir dir(path);
+    if (!dir.exists())
+    {
+        dir.mkpath(".");
+    }
+
+    db.setDatabaseName(path + "/database.sqlite");
 
     /* DEBUG */ qInfo() << path;
 
