@@ -44,13 +44,6 @@ void MainWindow::setupDatabase()
 void MainWindow::displayStudents()
 {
     model->setTable("students");
-
-    if (nameFilter != "")
-        model->setFilter(QString("firstname LIKE '%%1%' OR lastname LIKE '%%1%'").arg(nameFilter));
-
-    if (displayOnlyWithoutCert)
-        model->setFilter("certdate IS NULL");
-
     model->setSort(1, Qt::AscendingOrder);
     model->select();
 
@@ -62,6 +55,25 @@ void MainWindow::displayStudents()
     ui->tblStudents->setModel(model);
     ui->tblStudents->hideColumn(0);
     ui->tblStudents->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void MainWindow::filterStudents()
+{
+    QStringList filter;
+
+    if (!nameFilter.isEmpty())
+    {
+        filter.append(QString("firstname LIKE '%%1%' OR lastname LIKE '%%1%'").arg(nameFilter));
+    }
+
+    if (displayOnlyWithoutCert)
+    {
+        filter.append("certdate IS NULL");
+    }
+
+    model->setFilter(filter.join(" AND "));
+
+    /* DEBUG */ qInfo() << model->filter();
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -85,16 +97,16 @@ MainWindow::~MainWindow()
 void MainWindow::on_btnSearchName_clicked()
 {
     nameFilter = ui->leSearchName->text().trimmed();
-    displayStudents();
 
-    /* DEBUG */ qInfo() <<  "Search:" << nameFilter;
+    filterStudents();
 }
 
 
 void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
 {
     displayOnlyWithoutCert = checked;
-    displayStudents();
+
+    filterStudents();
 }
 
 

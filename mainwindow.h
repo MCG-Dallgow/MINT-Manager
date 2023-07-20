@@ -24,6 +24,7 @@ public:
 private:
     void setupDatabase();
     void displayStudents();
+    void filterStudents();
 
 private slots:
     void on_btnSearchName_clicked();
@@ -41,7 +42,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
-    QString nameFilter = "";
+    QString nameFilter;
     bool displayOnlyWithoutCert = false;
     QModelIndex selectedTableIndex;
     EditStudentDialog *dialog;
