@@ -18,24 +18,20 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    QSqlTableModel *model;
-
 private:
     void displayStudents();
     void filterStudents();
 
 private slots:
     void on_btnSearchName_clicked();
-
     void on_rbOnlyWithoutCert_toggled(bool checked);
-
     void on_btnRemoveStudent_clicked();
-
     void on_tblStudents_pressed(const QModelIndex &index);
-
     void on_btnAddStudent_clicked();
-
     void on_btnEditStudent_clicked();
+
+public:
+    QSqlTableModel *model;
 
 private:
     Ui::MainWindow *ui;

@@ -61,14 +61,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_btnSearchName_clicked()
 {
     nameFilter = ui->leSearchName->text().trimmed();
 
     filterStudents();
 }
-
 
 void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
 {
@@ -77,26 +75,22 @@ void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
     filterStudents();
 }
 
-
 void MainWindow::on_btnRemoveStudent_clicked()
 {
     model->removeRow(selectedTableIndex.row());
     model->select();
 }
 
-
 void MainWindow::on_tblStudents_pressed(const QModelIndex &index)
 {
     selectedTableIndex = index;
 }
-
 
 void MainWindow::on_btnAddStudent_clicked()
 {
     dialog = new EditStudentDialog(this, -1);
     dialog->show();
 }
-
 
 void MainWindow::on_btnEditStudent_clicked()
 {
