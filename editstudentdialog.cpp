@@ -4,25 +4,26 @@
 #include <QSqlQueryModel>
 #include <QSqlRecord>
 #include <QSqlQuery>
+#include <QSqlField>
 
-EditStudentDialog::EditStudentDialog(int studentId, QWidget *parent) :
+#include "mainwindow.h"
+
+EditStudentDialog::EditStudentDialog(QWidget *parent, int selectedRow) :
     QDialog(parent),
     ui(new Ui::EditStudentDialog),
-    studentId(studentId)
+    selectedRow(selectedRow)
 {
     ui->setupUi(this);
 
-    if (studentId != -1)
+    model = ((MainWindow*) parent)->model;
+
+    if (selectedRow != -1)
     {
         setWindowTitle("Schüler bearbeiten");
 
-        QString query = QString("SELECT * FROM students WHERE id=%1").arg(studentId);
-        QSqlQueryModel model;
-        model.setQuery(query);
-
-        QString firstname = model.record(0).value("firstname").toString();
-        QString lastname = model.record(0).value("lastname").toString();
-        QString birthdateString = model.record(0).value("birthdate").toString();
+        QString firstname = model->record(selectedRow).value("firstname").toString();
+        QString lastname = model->record(selectedRow).value("lastname").toString();
+        QString birthdateString = model->record(selectedRow).value("birthdate").toString();
         QDate birthdate = QDate::fromString(birthdateString, "dd.MM.yyyy");
 
         ui->leFirstname->setText(firstname);
@@ -42,26 +43,21 @@ void EditStudentDialog::on_pushButton_clicked()
     QString lastname = ui->leLastname->text();
     QString birthdate = ui->deBirthdate->date().toString("dd.MM.yyyy");
 
-    QSqlQuery query;
+    QSqlRecord record = model->record();
+    record.setValue("firstname", firstname);
+    record.setValue("lastname", lastname);
+    record.setValue("birthdate", birthdate);
+    record.setGenerated("id", false);
 
-    if (studentId == -1) {
-        query.prepare("INSERT INTO students (firstname, lastname, birthdate) "
-                      "VALUES (:firstname, :lastname, :birthdate)");
-        query.bindValue(":firstname", firstname);
-        query.bindValue(":lastname", lastname);
-        query.bindValue(":birthdate", birthdate);
+    if (selectedRow == -1) {
+        model->insertRecord(-1, record);
     }
     else
     {
-        query.prepare("UPDATE students "
-                      "SET firstname=:firstname, lastname=:lastname, birthdate=:birthdate "
-                      "WHERE id=:id");
-        query.bindValue(":firstname", firstname);
-        query.bindValue(":lastname", lastname);
-        query.bindValue(":birthdate", birthdate);
-        query.bindValue(":id", studentId);
+        model->setRecord(selectedRow, record);
     }
-    query.exec();
+
+    model->sort(1, Qt::AscendingOrder);
 
     close();
 }

@@ -62,7 +62,6 @@ void MainWindow::displayStudents()
     ui->tblStudents->setModel(model);
     ui->tblStudents->hideColumn(0);
     ui->tblStudents->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tblStudents->show();
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -101,16 +100,8 @@ void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
 
 void MainWindow::on_btnRemoveStudent_clicked()
 {
-    int studentId = model->record(selectedTableIndex.row()).value(0).value<int>();
-
-    /* DEBUG */ qInfo() << " Deleted Student ID:" << studentId;
-
-    QSqlQuery query;
-    query.prepare("DELETE FROM students WHERE id=:id");
-    query.bindValue(":id", studentId);
-    query.exec();
-
-    displayStudents();
+    model->removeRow(selectedTableIndex.row());
+    model->select();
 }
 
 
@@ -122,10 +113,8 @@ void MainWindow::on_tblStudents_pressed(const QModelIndex &index)
 
 void MainWindow::on_btnAddStudent_clicked()
 {
-    dialog = new EditStudentDialog();
-    dialog->exec();
-
-    displayStudents();
+    dialog = new EditStudentDialog(this, -1);
+    dialog->open();
 }
 
 
@@ -137,9 +126,7 @@ void MainWindow::on_btnEditStudent_clicked()
                         : model->record(selectedTableIndex.row()).value(0).value<int>();
     qInfo() << studentId;
 
-    dialog = new EditStudentDialog(studentId);
-    dialog->exec();
-
-    displayStudents();
+    dialog = new EditStudentDialog(this, selectedTableIndex.row());
+    dialog->open();
 }
 

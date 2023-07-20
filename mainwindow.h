@@ -19,6 +19,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QSqlTableModel *model;
+
+private:
     void setupDatabase();
     void displayStudents();
 
@@ -38,7 +41,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QSqlDatabase db;
-    QSqlTableModel *model;
     QString nameFilter = "";
     bool displayOnlyWithoutCert = false;
     QModelIndex selectedTableIndex;
