@@ -94,19 +94,13 @@ void MainWindow::on_tblStudents_pressed(const QModelIndex &index)
 void MainWindow::on_btnAddStudent_clicked()
 {
     dialog = new EditStudentDialog(this, -1);
-    dialog->open();
+    dialog->show();
 }
 
 
 void MainWindow::on_btnEditStudent_clicked()
 {
-    qInfo() << selectedTableIndex;
-    int studentId = selectedTableIndex.row() == -1
-                        ? -1
-                        : model->record(selectedTableIndex.row()).value(0).value<int>();
-    qInfo() << studentId;
-
     dialog = new EditStudentDialog(this, selectedTableIndex.row());
-    dialog->open();
+    dialog->show();
 }
 
