@@ -21,7 +21,6 @@ public:
     QSqlTableModel *model;
 
 private:
-    void setupDatabase();
     void displayStudents();
     void filterStudents();
 
@@ -40,7 +39,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase db;
     QString nameFilter;
     bool displayOnlyWithoutCert = false;
     QModelIndex selectedTableIndex;

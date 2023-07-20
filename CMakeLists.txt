@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
 	editstudentdialog.cpp
 	editstudentdialog.h
 	editstudentdialog.ui
+        database.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

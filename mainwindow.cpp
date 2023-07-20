@@ -11,36 +11,6 @@
 
 #include "editstudentdialog.h"
 
-void MainWindow::setupDatabase()
-{
-    db = QSqlDatabase::addDatabase("QSQLITE");
-
-    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
-    QDir dir(path);
-    if (!dir.exists())
-    {
-        dir.mkpath(".");
-    }
-
-    db.setDatabaseName(path + "/database.sqlite");
-
-    /* DEBUG */ qInfo() << path;
-
-    bool ok = db.open();
-
-    QSqlQuery setupQuery;
-    ok = setupQuery.exec("CREATE TABLE IF NOT EXISTS students"
-                         "(id INTEGER NOT NULL, "
-                         "lastname TEXT NOT NULL, "
-                         "firstname TEXT NOT NULL, "
-                         "birthdate TEXT NOT NULL,"
-                         "certdate TEXT,"
-                         "PRIMARY KEY(id AUTOINCREMENT))");
-
-    /* DEBUG */ qInfo() << (ok ? "Successful" : "Failed") << setupQuery.lastError();
-}
-
 void MainWindow::displayStudents()
 {
     model->setTable("students");
@@ -81,8 +51,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    setupDatabase();
 
     model = new QSqlTableModel;
     displayStudents();
