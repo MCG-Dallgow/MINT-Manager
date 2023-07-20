@@ -1,5 +1,4 @@
-#ifndef EDITSTUDENTDIALOG_H
-#define EDITSTUDENTDIALOG_H
+#pragma once
 
 #include <QDialog>
 #include <QSqlTableModel>
@@ -25,4 +24,3 @@ private:
     int selectedRow;
 };
 
-#endif // EDITSTUDENTDIALOG_H

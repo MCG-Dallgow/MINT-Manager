@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QSqlDatabase>
@@ -47,4 +46,4 @@ private:
     QModelIndex selectedTableIndex;
     EditStudentDialog *dialog;
 };
-#endif // MAINWINDOW_H
+
