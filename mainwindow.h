@@ -30,6 +30,8 @@ private slots:
     void on_btnAddStudent_clicked();
     void on_btnEditStudent_clicked();
 
+    void onTableSelectionChanged(bool hasSelection);
+
 public:
     QSqlTableModel *model;
 

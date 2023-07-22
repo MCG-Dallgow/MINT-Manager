@@ -54,6 +54,13 @@ void MainWindow::filterStudents()
     /* DEBUG */ qInfo() << model->filter();
 }
 
+// SLOT - enable or disable buttons when called
+void MainWindow::onTableSelectionChanged(bool hasSelection)
+{
+    ui->btnEditStudent->setEnabled(hasSelection);
+    ui->btnRemoveStudent->setEnabled(hasSelection);
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -62,6 +69,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     model = new QSqlTableModel;
     displayStudents();
+
+    // execute slot when selection in table view changes
+    const QItemSelectionModel *selection = ui->tblStudents->selectionModel();
+    connect(selection, &QItemSelectionModel::selectionChanged, this, [=]{ onTableSelectionChanged(selection->hasSelection()); });
 }
 
 MainWindow::~MainWindow()
@@ -75,6 +86,7 @@ void MainWindow::on_btnSearchName_clicked()
     nameFilter = ui->leSearchName->text().trimmed();
 
     filterStudents();
+    onTableSelectionChanged(false);
 }
 
 // when radio button is selected, only display students without certificate
@@ -83,6 +95,7 @@ void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
     displayOnlyWithoutCert = checked;
 
     filterStudents();
+    onTableSelectionChanged(false);
 }
 
 // when remove button is clicked, delete selected student from database
@@ -90,6 +103,7 @@ void MainWindow::on_btnRemoveStudent_clicked()
 {
     model->removeRow(selectedTableIndex.row());
     model->select();
+    onTableSelectionChanged(false);
 }
 
 // when table row is pressed, update selected student
@@ -103,6 +117,7 @@ void MainWindow::on_btnAddStudent_clicked()
 {
     dialog = new EditStudentDialog(this, -1);
     dialog->show();
+    onTableSelectionChanged(false);
 }
 
 // when edit button is clicked, open dialog to edit selected student
@@ -110,5 +125,6 @@ void MainWindow::on_btnEditStudent_clicked()
 {
     dialog = new EditStudentDialog(this, selectedTableIndex.row());
     dialog->show();
+    onTableSelectionChanged(false);
 }
 
