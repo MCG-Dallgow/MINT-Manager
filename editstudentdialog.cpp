@@ -45,8 +45,8 @@ EditStudentDialog::~EditStudentDialog()
 void EditStudentDialog::on_btnSave_clicked()
 {
     // get new/edited student data from UI
-    QString firstname = ui->leFirstname->text();
-    QString lastname = ui->leLastname->text();
+    QString firstname = ui->leFirstname->text().trimmed();
+    QString lastname = ui->leLastname->text().trimmed();
     QString birthdate = ui->deBirthdate->date().toString("dd.MM.yyyy");
 
     // create SQL record from student data
