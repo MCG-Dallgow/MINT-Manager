@@ -49,10 +49,23 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="leSearchName"/>
+           <widget class="QLineEdit" name="leSearchName">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="btnSearchName">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>32</height>
+             </size>
+            </property>
             <property name="text">
              <string>Suchen</string>
             </property>
