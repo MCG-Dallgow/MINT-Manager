@@ -16,7 +16,7 @@ public:
     ~EditStudentDialog();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_btnSave_clicked();
 
 private:
     Ui::EditStudentDialog *ui;

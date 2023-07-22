@@ -9,6 +9,7 @@
 
 int main(int argc, char *argv[])
 {
+    // set application name and version
     QCoreApplication::setApplicationName(APPLICATION_NAME);
     QCoreApplication::setApplicationVersion(APPLICATION_VERSION);
 

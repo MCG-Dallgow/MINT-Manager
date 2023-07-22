@@ -15,17 +15,21 @@ EditStudentDialog::EditStudentDialog(QWidget *parent, int selectedRow) :
 {
     ui->setupUi(this);
 
+    // get student data from main window
     model = ((MainWindow*) parent)->model;
 
+    // if student is selected in table view, edit that student
     if (selectedRow != -1)
     {
         setWindowTitle("Schüler bearbeiten");
 
+        // get student data from database
         QString firstname = model->record(selectedRow).value("firstname").toString();
         QString lastname = model->record(selectedRow).value("lastname").toString();
         QString birthdateString = model->record(selectedRow).value("birthdate").toString();
         QDate birthdate = QDate::fromString(birthdateString, "dd.MM.yyyy");
 
+        // display student data in UI
         ui->leFirstname->setText(firstname);
         ui->leLastname->setText(lastname);
         ui->deBirthdate->setDate(birthdate);
@@ -37,12 +41,15 @@ EditStudentDialog::~EditStudentDialog()
     delete ui;
 }
 
-void EditStudentDialog::on_pushButton_clicked()
+// when save button is clicked, save new/edited student to database
+void EditStudentDialog::on_btnSave_clicked()
 {
+    // get new/edited student data from UI
     QString firstname = ui->leFirstname->text();
     QString lastname = ui->leLastname->text();
     QString birthdate = ui->deBirthdate->date().toString("dd.MM.yyyy");
 
+    // create SQL record from student data
     QSqlRecord record = model->record();
     record.setValue("firstname", firstname);
     record.setValue("lastname", lastname);
@@ -50,10 +57,12 @@ void EditStudentDialog::on_pushButton_clicked()
     record.setGenerated("id", false);
 
     if (selectedRow == -1) {
+        // add student to database if in add mode
         model->insertRecord(-1, record);
     }
     else
     {
+        // update student if in edit mode
         model->setRecord(selectedRow, record);
     }
 
