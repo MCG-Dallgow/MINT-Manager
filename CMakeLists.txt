@@ -16,18 +16,18 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
 
 set(PROJECT_SOURCES
-        main.cpp
-        constants.h
-        database.h
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-	editstudentdialog.cpp
-	editstudentdialog.h
-	editstudentdialog.ui
-        manageactivitiesdialog.cpp
-        manageactivitiesdialog.h
-        manageactivitiesdialog.ui
+        mint-manager/main.cpp
+        mint-manager/constants.h
+        mint-manager/database.h
+        mint-manager/mainwindow.cpp
+        mint-manager/mainwindow.h
+        mint-manager/mainwindow.ui
+        mint-manager/editstudentdialog.cpp
+        mint-manager/editstudentdialog.h
+        mint-manager/editstudentdialog.ui
+        mint-manager/manageactivitiesdialog.cpp
+        mint-manager/manageactivitiesdialog.h
+        mint-manager/manageactivitiesdialog.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
