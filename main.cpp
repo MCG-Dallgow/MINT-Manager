@@ -2,10 +2,8 @@
 
 #include <QApplication>
 
+#include "constants.h"
 #include "database.h"
-
-#define APPLICATION_NAME "MINT-Verwaltung"
-#define APPLICATION_VERSION "0.1.0"
 
 int main(int argc, char *argv[])
 {

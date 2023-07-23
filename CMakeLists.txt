@@ -17,13 +17,14 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
 
 set(PROJECT_SOURCES
         main.cpp
+        constants.h
+        database.h
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
 	editstudentdialog.cpp
 	editstudentdialog.h
 	editstudentdialog.ui
-        database.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
