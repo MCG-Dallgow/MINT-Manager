@@ -5,6 +5,7 @@
 #include <QSqlTableModel>
 
 #include "editstudentdialog.h"
+#include "manageactivitiesdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,14 +24,15 @@ private:
     void filterStudents();
 
 private slots:
+    void onTableSelectionChanged(bool hasSelection);
+
     void on_btnSearchName_clicked();
     void on_rbOnlyWithoutCert_toggled(bool checked);
     void on_btnRemoveStudent_clicked();
     void on_tblStudents_pressed(const QModelIndex &index);
     void on_btnAddStudent_clicked();
     void on_btnEditStudent_clicked();
-
-    void onTableSelectionChanged(bool hasSelection);
+    void on_btnManageActivities_clicked();
 
 public:
     QSqlTableModel *model;
@@ -40,6 +42,7 @@ private:
     QString nameFilter;
     bool displayOnlyWithoutCert = false;
     QModelIndex selectedTableIndex;
-    EditStudentDialog *dialog;
+    EditStudentDialog *editStudentDialog;
+    ManageActivitiesDialog *manageActivitiesDialog;
 };
 

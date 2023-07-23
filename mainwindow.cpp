@@ -10,6 +10,7 @@
 #include <QSqlRecord>
 
 #include "editstudentdialog.h"
+#include "manageactivitiesdialog.h"
 
 // get student data from database and display it in table view
 void MainWindow::displayStudents()
@@ -59,6 +60,7 @@ void MainWindow::onTableSelectionChanged(bool hasSelection)
 {
     ui->btnEditStudent->setEnabled(hasSelection);
     ui->btnRemoveStudent->setEnabled(hasSelection);
+    ui->btnManageActivities->setEnabled(hasSelection);
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -115,16 +117,28 @@ void MainWindow::on_tblStudents_pressed(const QModelIndex &index)
 // when add button is clicked, open dialog to add new student
 void MainWindow::on_btnAddStudent_clicked()
 {
-    dialog = new EditStudentDialog(this, -1);
-    dialog->show();
+    editStudentDialog = new EditStudentDialog(this, -1);
+    editStudentDialog->show();
     onTableSelectionChanged(false);
 }
 
 // when edit button is clicked, open dialog to edit selected student
 void MainWindow::on_btnEditStudent_clicked()
 {
-    dialog = new EditStudentDialog(this, selectedTableIndex.row());
-    dialog->show();
+    editStudentDialog = new EditStudentDialog(this, selectedTableIndex.row());
+    editStudentDialog->show();
     onTableSelectionChanged(false);
+}
+
+// when manage activities button is clicked, open
+// dialog to manage MINT activities of selected student
+void MainWindow::on_btnManageActivities_clicked()
+{
+    QSqlRecord studentRecord = model->record(selectedTableIndex.row());
+    QString studentName = QString("%1 %2")
+            .arg(studentRecord.value("firstname").toString())
+            .arg(studentRecord.value("lastname").toString());
+    manageActivitiesDialog = new ManageActivitiesDialog(this, studentName);
+    manageActivitiesDialog->show();
 }
 

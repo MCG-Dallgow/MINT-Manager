@@ -25,6 +25,9 @@ set(PROJECT_SOURCES
 	editstudentdialog.cpp
 	editstudentdialog.h
 	editstudentdialog.ui
+        manageactivitiesdialog.cpp
+        manageactivitiesdialog.h
+        manageactivitiesdialog.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
