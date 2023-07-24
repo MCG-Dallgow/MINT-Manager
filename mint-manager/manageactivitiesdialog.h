@@ -28,6 +28,6 @@ private slots:
 private:
     Ui::ManageActivitiesDialog *ui;
     Student *student;
-    QList<float> subjectAverages = QList<float>(4, -1.0);
+    QList<float> subjectAverages = QList<float>(5, -1.0);
 };
 

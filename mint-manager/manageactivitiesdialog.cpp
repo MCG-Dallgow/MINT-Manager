@@ -23,7 +23,7 @@ void ManageActivitiesDialog::displayGradeAverage(int subject)
 {
     // get spin boxes displaying subject grades
     QString pattern = QString("sbSubject%1Grade[1-4]").arg(subject);
-    QList<QSpinBox*> sbSubjects =  this->findChildren<QSpinBox*>(pattern);
+    QList<QSpinBox*> sbSubjects = this->findChildren<QSpinBox*>(QRegularExpression(pattern));
 
     // get line edit displaying subject average
     QString objectName = QString("leSubject%1Avg").arg(subject);
