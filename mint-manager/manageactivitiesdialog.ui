@@ -953,6 +953,42 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>rbSubject1Lk</tabstop>
+  <tabstop>rbSubject1Gk</tabstop>
+  <tabstop>cmbSubject1Name</tabstop>
+  <tabstop>sbSubject1Grade1</tabstop>
+  <tabstop>sbSubject1Grade2</tabstop>
+  <tabstop>sbSubject1Grade3</tabstop>
+  <tabstop>sbSubject1Grade4</tabstop>
+  <tabstop>rbSubject2Lk</tabstop>
+  <tabstop>rbSubject2Gk</tabstop>
+  <tabstop>cmbSubject2Name</tabstop>
+  <tabstop>sbSubject2Grade1</tabstop>
+  <tabstop>sbSubject2Grade2</tabstop>
+  <tabstop>sbSubject2Grade3</tabstop>
+  <tabstop>sbSubject2Grade4</tabstop>
+  <tabstop>cbSubject3</tabstop>
+  <tabstop>cmbSubject3Name</tabstop>
+  <tabstop>sbSubject3Grade1</tabstop>
+  <tabstop>sbSubject3Grade2</tabstop>
+  <tabstop>sbSubject3Grade3</tabstop>
+  <tabstop>sbSubject3Grade4</tabstop>
+  <tabstop>cbSubject4</tabstop>
+  <tabstop>cmbSubject4Name</tabstop>
+  <tabstop>sbSubject4Grade1</tabstop>
+  <tabstop>sbSubject4Grade2</tabstop>
+  <tabstop>sbSubject4Grade3</tabstop>
+  <tabstop>sbSubject4Grade4</tabstop>
+  <tabstop>cbSubject5</tabstop>
+  <tabstop>cbSubject5Name</tabstop>
+  <tabstop>sbSubject5Grade1</tabstop>
+  <tabstop>sbSubject5Grade2</tabstop>
+  <tabstop>sbSubject5Grade3</tabstop>
+  <tabstop>sbSubject5Grade4</tabstop>
+  <tabstop>btnSave</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
  <buttongroups>
