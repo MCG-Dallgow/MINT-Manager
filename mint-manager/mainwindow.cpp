@@ -33,7 +33,7 @@ void MainWindow::filterStudents()
     // if a name filter is set, filter by first or last name
     if (!nameFilter.isEmpty())
     {
-        filter.append(QString("firstname LIKE '%%1%' OR lastname LIKE '%%1%'").arg(nameFilter));
+        filter.append(QString("(firstname LIKE '%%1%' OR lastname LIKE '%%1%')").arg(nameFilter));
     }
 
     // if active, filter out students that already have a certificate
