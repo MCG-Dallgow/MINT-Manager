@@ -22,7 +22,7 @@ void setupDatabase()
     // create or access database in appdata directory
     db.setDatabaseName(path + "/database.sqlite");
 
-    /* DEBUG */ qInfo() << "Application Directory:" << path;
+    qInfo() << "Application Directory:" << path;
 
     bool ok = db.open();
 
@@ -36,6 +36,6 @@ void setupDatabase()
                          "certdate TEXT,"
                          "PRIMARY KEY(id AUTOINCREMENT))");
 
-    /* DEBUG */ qInfo() << "Database Setup" << (ok ? "Successful" : "Failed");
+    qInfo() << "Database Setup" << (ok ? "Successful" : "Failed");
 }
 

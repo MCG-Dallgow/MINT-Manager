@@ -45,7 +45,7 @@ void MainWindow::filterStudents()
     // apply filters to student data
     Student::model()->setFilter(filter.join(" AND "));
 
-    /* DEBUG */ qInfo() << Student::model()->filter();
+    qDebug() << "Student Filter:" << Student::model()->filter();
 }
 
 // SLOT - enable or disable buttons when called
