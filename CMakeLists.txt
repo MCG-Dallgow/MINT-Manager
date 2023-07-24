@@ -18,6 +18,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
 set(PROJECT_SOURCES
         mint-manager/main.cpp
         mint-manager/constants.h
+        mint-manager/util.h
         mint-manager/database.h
         mint-manager/mainwindow.cpp
         mint-manager/mainwindow.h

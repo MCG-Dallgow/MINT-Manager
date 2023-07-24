@@ -16,9 +16,6 @@ public:
     ~ManageActivitiesDialog();
 
 private:
-    float gradeAverage(QList<float> grades);
-    float gradeAverage(QList<int> grades);
-    QString formatAverage(float average);
     void setupWidgets();
 
 private slots:

@@ -2,43 +2,7 @@
 #include "ui_manageactivitiesdialog.h"
 
 #include "constants.h"
-
-// get average of given grades or averages
-float ManageActivitiesDialog::gradeAverage(QList<float> grades)
-{
-    // remove negative values and return 0 if empty
-    grades.removeIf([](float grade) { return grade < 0; });
-    if (grades.isEmpty()) return 0;
-
-    // calculate sum of grades
-    float sum = 0;
-    for (float grade : grades)
-    {
-        if (grade >= 0) sum += grade;
-    }
-
-    // calculate and return average
-    return sum / (float)grades.length();
-}
-
-// OVERLOAD - get average of given grades
-float ManageActivitiesDialog::gradeAverage(QList<int> grades)
-{
-    // cast int list to float list
-    QList<float> gradesFloat;
-    for (int grade : grades)
-    {
-        gradesFloat << (float)grade;
-    }
-
-    return gradeAverage(gradesFloat);
-}
-
-// format grade average to two decimal places
-QString ManageActivitiesDialog::formatAverage(float average)
-{
-    return QString::number(QString::number(average, 'f', 2).toDouble(), 'g', 10);
-}
+#include "util.h"
 
 // SLOT - enable given subject
 void ManageActivitiesDialog::toggleSubject(int subject, bool state)
@@ -77,10 +41,12 @@ void ManageActivitiesDialog::displayGradeAverage(int subject)
     }
 
     // calculate subject average
-    float average = gradeAverage(grades);
+    float average = Util::average(grades);
 
     // format average to two decimal places
-    QString averageString = formatAverage(average);
+    QString averageString = average < 0
+            ? ""
+            : Util::formatDecimal(average, 2);
 
     // display average in line edit
     leAverage->setText(averageString);
@@ -94,10 +60,12 @@ void ManageActivitiesDialog::displayGradeAverage(int subject)
 void ManageActivitiesDialog::displayTotalAverage()
 {
     // calculate total average
-    float totalAverage = gradeAverage(subjectAverages);
+    float totalAverage = Util::average(subjectAverages);
 
     // format total average to two decimal places
-    QString totalAverageString = formatAverage(totalAverage);
+    QString totalAverageString = totalAverage < 0
+            ? ""
+            : Util::formatDecimal(totalAverage, 2);
 
     // display total average in line edit
     ui->leTotalAvg->setText(totalAverageString);
