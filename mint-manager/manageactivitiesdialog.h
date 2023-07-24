@@ -3,6 +3,8 @@
 #include <QDialog>
 #include <QList>
 
+#include "student.h"
+
 namespace Ui {
 class ManageActivitiesDialog;
 }
@@ -12,7 +14,7 @@ class ManageActivitiesDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ManageActivitiesDialog(QWidget *parent = nullptr, QString studentName = "Schüler");
+    explicit ManageActivitiesDialog(QWidget *parent = nullptr, Student *student = nullptr);
     ~ManageActivitiesDialog();
 
 private:
@@ -25,7 +27,7 @@ private slots:
 
 private:
     Ui::ManageActivitiesDialog *ui;
-    QString studentName;
+    Student *student;
     QList<float> subjectAverages = QList<float>(4, -1.0);
 };
 

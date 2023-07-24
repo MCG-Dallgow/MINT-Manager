@@ -34,14 +34,11 @@ private slots:
     void on_btnEditStudent_clicked();
     void on_btnManageActivities_clicked();
 
-public:
-    QSqlTableModel *model;
-
 private:
     Ui::MainWindow *ui;
     QString nameFilter;
     bool displayOnlyWithoutCert = false;
-    QModelIndex selectedTableIndex;
+    Student *selectedStudent;
     EditStudentDialog *editStudentDialog;
     ManageActivitiesDialog *manageActivitiesDialog;
 };

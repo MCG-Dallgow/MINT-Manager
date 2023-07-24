@@ -3,6 +3,8 @@
 #include <QDialog>
 #include <QSqlTableModel>
 
+#include "student.h"
+
 namespace Ui {
 class EditStudentDialog;
 }
@@ -12,7 +14,7 @@ class EditStudentDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EditStudentDialog(QWidget *parent = nullptr, int selectedRow = -1);
+    explicit EditStudentDialog(QWidget *parent = nullptr, Student *student = nullptr);
     ~EditStudentDialog();
 
 private slots:
@@ -21,6 +23,6 @@ private slots:
 private:
     Ui::EditStudentDialog *ui;
     QSqlTableModel *model;
-    int selectedRow;
+    Student *student;
 };
 

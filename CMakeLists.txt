@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
         mint-manager/constants.h
         mint-manager/util.h
         mint-manager/database.h
+        mint-manager/student.cpp
+        mint-manager/student.h
         mint-manager/mainwindow.cpp
         mint-manager/mainwindow.h
         mint-manager/mainwindow.ui

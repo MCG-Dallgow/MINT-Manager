@@ -9,6 +9,7 @@
 #include <QStandardPaths>
 #include <QSqlRecord>
 
+#include "student.h"
 #include "editstudentdialog.h"
 #include "manageactivitiesdialog.h"
 
@@ -16,18 +17,10 @@
 void MainWindow::displayStudents()
 {
     // get student data from database
-    model->setTable("students");
-    model->setSort(1, Qt::AscendingOrder);
-    model->select();
-
-    // set header labels to increase readability
-    model->setHeaderData(1, Qt::Horizontal, "Nachname");
-    model->setHeaderData(2, Qt::Horizontal, "Vorname");
-    model->setHeaderData(3, Qt::Horizontal, "Geburtsdatum");
-    model->setHeaderData(4, Qt::Horizontal, "Zertifikat");
+    Student::model();
 
     // display data in table view
-    ui->tblStudents->setModel(model);
+    ui->tblStudents->setModel(Student::model());
     ui->tblStudents->hideColumn(0);
     ui->tblStudents->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -50,9 +43,9 @@ void MainWindow::filterStudents()
     }
 
     // apply filters to student data
-    model->setFilter(filter.join(" AND "));
+    Student::model()->setFilter(filter.join(" AND "));
 
-    /* DEBUG */ qInfo() << model->filter();
+    /* DEBUG */ qInfo() << Student::model()->filter();
 }
 
 // SLOT - enable or disable buttons when called
@@ -69,7 +62,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    model = new QSqlTableModel;
     displayStudents();
 
     // execute slot when selection in table view changes
@@ -103,21 +95,20 @@ void MainWindow::on_rbOnlyWithoutCert_toggled(bool checked)
 // when remove button is clicked, delete selected student from database
 void MainWindow::on_btnRemoveStudent_clicked()
 {
-    model->removeRow(selectedTableIndex.row());
-    model->select();
+    selectedStudent->remove();
     onTableSelectionChanged(false);
 }
 
 // when table row is pressed, update selected student
 void MainWindow::on_tblStudents_pressed(const QModelIndex &index)
 {
-    selectedTableIndex = index;
+    selectedStudent = new Student(index.row());
 }
 
 // when add button is clicked, open dialog to add new student
 void MainWindow::on_btnAddStudent_clicked()
 {
-    editStudentDialog = new EditStudentDialog(this, -1);
+    editStudentDialog = new EditStudentDialog(this);
     editStudentDialog->show();
     onTableSelectionChanged(false);
 }
@@ -125,7 +116,7 @@ void MainWindow::on_btnAddStudent_clicked()
 // when edit button is clicked, open dialog to edit selected student
 void MainWindow::on_btnEditStudent_clicked()
 {
-    editStudentDialog = new EditStudentDialog(this, selectedTableIndex.row());
+    editStudentDialog = new EditStudentDialog(this, selectedStudent);
     editStudentDialog->show();
     onTableSelectionChanged(false);
 }
@@ -134,11 +125,7 @@ void MainWindow::on_btnEditStudent_clicked()
 // dialog to manage MINT activities of selected student
 void MainWindow::on_btnManageActivities_clicked()
 {
-    QSqlRecord studentRecord = model->record(selectedTableIndex.row());
-    QString studentName = QString("%1 %2")
-            .arg(studentRecord.value("firstname").toString())
-            .arg(studentRecord.value("lastname").toString());
-    manageActivitiesDialog = new ManageActivitiesDialog(this, studentName);
+    manageActivitiesDialog = new ManageActivitiesDialog(this, selectedStudent);
     manageActivitiesDialog->show();
 }
 

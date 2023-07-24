@@ -71,6 +71,9 @@ void ManageActivitiesDialog::displayTotalAverage()
 void ManageActivitiesDialog::setupWidgets()
 {
     // set label text to name of student
+    QString studentName = QString("%1 %2")
+            .arg(student->firstname())
+            .arg(student->lastname());
     ui->lblStudentName->setText(studentName);
 
     // iterate through all widgets in grid layout
@@ -126,10 +129,10 @@ void ManageActivitiesDialog::setupWidgets()
     }
 }
 
-ManageActivitiesDialog::ManageActivitiesDialog(QWidget *parent, QString studentName) :
+ManageActivitiesDialog::ManageActivitiesDialog(QWidget *parent, Student *student) :
     QDialog(parent),
     ui(new Ui::ManageActivitiesDialog),
-    studentName(studentName)
+    student(student)
 {
     ui->setupUi(this);
 
