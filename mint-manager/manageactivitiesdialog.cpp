@@ -22,12 +22,8 @@ void ManageActivitiesDialog::toggleSubject(int subject, bool state)
 void ManageActivitiesDialog::displayGradeAverage(int subject)
 {
     // get spin boxes displaying subject grades
-    QList<QSpinBox*> sbSubjects;
-    for (int i = 1; i <= 4; i++)
-    {
-        QString objectName = QString("sbSubject%1Grade%2").arg(subject).arg(i);
-        sbSubjects << this->findChild<QSpinBox*>(objectName);
-    }
+    QString pattern = QString("sbSubject%1Grade[1-4]").arg(subject);
+    QList<QSpinBox*> sbSubjects =  this->findChildren<QSpinBox*>(pattern);
 
     // get line edit displaying subject average
     QString objectName = QString("leSubject%1Avg").arg(subject);
@@ -37,7 +33,7 @@ void ManageActivitiesDialog::displayGradeAverage(int subject)
     QList<int> grades;
     for (QSpinBox *sbSubject : sbSubjects)
     {
-        grades.append(sbSubject->value());
+        grades << sbSubject->value();
     }
 
     // calculate subject average
