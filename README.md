@@ -1,6 +1,6 @@
 # MINT-Manager
 
-Unoffizielles Programm zur Verwaltung von MINT-Leistungen
+Inoffizielles Programm zur Verwaltung von MINT-Leistungen
 
 ## Lizenz
 
