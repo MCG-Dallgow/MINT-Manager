@@ -4,7 +4,7 @@
 
 namespace Util {
     // get average of given values
-    float average(QList<float> values)
+    inline float average(QList<float> values)
     {
         // remove negative values and return 0 if empty
         values.removeIf([](float value) { return value < 0; });
@@ -22,7 +22,7 @@ namespace Util {
     }
 
     // OVERLOAD - get average of given integer values
-    float average(QList<int> values)
+    inline float average(QList<int> values)
     {
         // cast int list to float list
         QList<float> valuesFloat;
@@ -35,7 +35,7 @@ namespace Util {
     }
 
     // format float with specified number of decimal places
-    QString formatDecimal(float average, int places)
+    inline QString formatDecimal(float average, int places)
     {
         return QString::number(QString::number(average, 'f', places).toDouble(), 'g', 10);
     }

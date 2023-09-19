@@ -20,9 +20,6 @@
       <property name="currentIndex">
        <number>1</number>
       </property>
-      <property name="documentMode">
-       <bool>true</bool>
-      </property>
       <widget class="QWidget" name="tabMain">
        <attribute name="title">
         <string>Startseite</string>

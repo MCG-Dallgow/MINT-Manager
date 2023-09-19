@@ -3,7 +3,10 @@
 #include <QDialog>
 #include <QList>
 
+#include "constants.h"
 #include "student.h"
+#include "scientificworkdialog.h"
+#include "util.h"
 
 namespace Ui {
 class ManageActivitiesDialog;
@@ -18,6 +21,7 @@ public:
     ~ManageActivitiesDialog();
 
 private:
+    void setupTab1();
     void setupWidgets();
 
 private slots:
@@ -25,8 +29,11 @@ private slots:
     void displayGradeAverage(int subject);
     void displayTotalAverage();
 
+    void on_tab2_btnAddEntry_clicked();
+
 private:
     Ui::ManageActivitiesDialog *ui;
+    ScientificWorkDialog *scientificWorkDialog;
     Student *student;
     QList<float> subjectAverages = QList<float>(5, -1.0);
 };

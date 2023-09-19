@@ -1,9 +1,6 @@
 #include "manageactivitiesdialog.h"
 #include "ui_manageactivitiesdialog.h"
 
-#include "constants.h"
-#include "util.h"
-
 // SLOT - enable given subject
 void ManageActivitiesDialog::toggleSubject(int subject, bool state)
 {
@@ -67,15 +64,9 @@ void ManageActivitiesDialog::displayTotalAverage()
     ui->leTotalAvg->setText(totalAverageString);
 }
 
-// setup widgets
-void ManageActivitiesDialog::setupWidgets()
+// setup widgets in tab 1
+void ManageActivitiesDialog::setupTab1()
 {
-    // set label text to name of student
-    QString studentName = QString("%1 %2")
-            .arg(student->firstname())
-            .arg(student->lastname());
-    ui->lblStudentName->setText(studentName);
-
     // iterate through all widgets in grid layout
     for (int i = 0; i < ui->gridLayout->count(); i++)
     {
@@ -129,6 +120,20 @@ void ManageActivitiesDialog::setupWidgets()
     }
 }
 
+
+// setup widgets
+void ManageActivitiesDialog::setupWidgets()
+{
+    // set label text to name of student
+    QString studentName = QString("%1 %2")
+            .arg(student->firstname())
+            .arg(student->lastname());
+    ui->lblStudentName->setText(studentName);
+
+    // setup widgets in tabs
+    setupTab1();
+}
+
 ManageActivitiesDialog::ManageActivitiesDialog(QWidget *parent, Student *student) :
     QDialog(parent),
     ui(new Ui::ManageActivitiesDialog),
@@ -142,4 +147,10 @@ ManageActivitiesDialog::ManageActivitiesDialog(QWidget *parent, Student *student
 ManageActivitiesDialog::~ManageActivitiesDialog()
 {
     delete ui;
+}
+
+void ManageActivitiesDialog::on_tab2_btnAddEntry_clicked()
+{
+    scientificWorkDialog = new ScientificWorkDialog(this);
+    scientificWorkDialog->show();
 }

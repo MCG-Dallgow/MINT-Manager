@@ -31,6 +31,9 @@ set(PROJECT_SOURCES
         mint-manager/manageactivitiesdialog.cpp
         mint-manager/manageactivitiesdialog.h
         mint-manager/manageactivitiesdialog.ui
+        mint-manager/scientificworkdialog.cpp
+        mint-manager/scientificworkdialog.h
+        mint-manager/scientificworkdialog.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
